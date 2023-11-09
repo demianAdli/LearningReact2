@@ -1,4 +1,3 @@
-import React, { FormEvent, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +15,7 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const onSubmit = (data: FieldValues) => console.log(data);
   return (
@@ -38,7 +37,7 @@ const Form = () => {
           Age
         </label>
         <input
-          {...(register("age"), { valueAsNumber: true })}
+          {...register("age", { valueAsNumber: true })}
           id="age"
           type="number"
           className="form-control"
